@@ -1,0 +1,18 @@
+---
+description: Команды Python через uv из корня репозитория.
+alwaysApply: true
+---
+
+# Окружение
+
+Корень — каталог с `pyproject.toml`, `Makefile` и `uv.lock`. Окружение создаёт uv. Другое не создавай без задачи.
+
+```bash
+make sync    # uv sync
+make test    # uv run pytest
+```
+
+- Тесты запускай через `make test` или `uv run pytest`.
+- Зависимости ставь через `uv add` и `make sync`.
+- Голый `pip`, голый `pytest` и голый `alembic` не используй.
+- Форматтер и линтер бери из реальной конфигурации. Сейчас в `pyproject.toml` задан только pytest.

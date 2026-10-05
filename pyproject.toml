@@ -1,0 +1,73 @@
+[project]
+name = "lyceum"
+version = "0.1.0"
+description = "Articles about IT"
+requires-python = ">=3.12"
+dependencies = [
+    "aiogram>=3.13",
+    "httpx>=0.27",
+    "trafilatura>=2",
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "SQLAlchemy>=2",
+    "alembic>=1.13",
+    "APScheduler>=3.10",
+    "cursor-sdk>=1.0.35",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.16.10",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+
+[tool.ruff]
+exclude = [
+    ".direnv",
+    ".git",
+    ".git-rewrite",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    ".vscode",
+    "node_modules",
+    "migrations",
+    "tests",
+    "static",
+    "assets",
+
+]
+line-length = 320
+indent-width = 4
+target-version = "py310"
+
+[tool.ruff.lint]
+ignore = ["ISC001", "D203", "D213"]
+select = [
+    "E",   # pycodestyle
+    "F",   # flake8
+    "I",   # isort
+]
+fixable = ["ALL"]
+unfixable = []
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"

@@ -1,0 +1,17 @@
+---
+description: Слои Lyceum и запрещённые импорты. Зависимости смотрят внутрь.
+alwaysApply: true
+---
+
+# Слои
+
+Зависимости: handlers → application → domain. infrastructure реализует протоколы domain и не вызывает сценарии. Сценарии синхронные.
+
+- **domain** — сущности, статусы, протоколы. Без aiogram, SQLAlchemy, httpx, trafilatura, Alembic, APScheduler, `cursor_sdk`, application, infrastructure, handlers, config.
+- **application** — сценарии модерации. Без базы, Telegram, infrastructure, handlers, config.
+- **handlers** — клавиатура и callback. Без бизнес-правил и без infrastructure.
+- **infrastructure** — SQLite, скачивание, саммари через `cursor_sdk`, заготовка отправки. Не импортирует application и handlers. `cursor_sdk` только в адаптере саммари.
+
+Публикация в канал — только после одобрения и выбранной темы. Повторный approve не отправляет второе сообщение. Отклонение не публикует. Форум с ветками не используется: комментарии даёт обсуждение канала.
+
+Проверка импортов уже есть в `tests/test_layers.py`. Новый запрет добавляй туда же.
